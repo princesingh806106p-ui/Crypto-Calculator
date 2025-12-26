@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crypto PnL Calculator</title>
+<style>
+body{font-family:Arial;background:#111;color:#fff;padding:20px}
+input{width:100%;padding:8px;margin:6px 0}
+button{padding:10px;width:100%;background:#f7931a;border:none;font-size:16px}
+.box{max-width:400px;margin:auto;border:1px solid #333;padding:15px}
+</style>
+</head>
+<body>
+
+<div class="box">
+<h2>Crypto Calculator</h2>
+
+Entry Price ($)
+<input id="entry" type="number">
+
+Exit / SL Price ($)
+<input id="exit" type="number">
+
+Risk ($)
+<input id="risk" type="number">
+
+Leverage (x)
+<input id="leverage" type="number">
+
+<button onclick="calc()">Calculate</button>
+
+<p id="result"></p>
+</div>
+
+<script>
+function calc(){
+let entry = entryPrice = document.getElementById("entry").value;
+let exit = document.getElementById("exit").value;
+let risk = document.getElementById("risk").value;
+let lev = document.getElementById("leverage").value;
+
+let qty = risk / Math.abs(entry-exit);
+let margin = (qty * entry) / lev;
+let pnl = (exit-entry) * qty;
+
+document.getElementById("result").innerHTML =
+`Quantity: ${qty.toFixed(4)} BTC <br>
+Margin: $${margin.toFixed(2)} <br>
+PnL: $${pnl.toFixed(2)}`;
+}
+</script>
+
+</body>
+</html>

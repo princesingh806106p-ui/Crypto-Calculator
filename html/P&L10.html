@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crypto Calculator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+}
+
+/* Animations */
+@keyframes startAnim{
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes floatSmooth{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-10px)}
+    100%{transform:translateY(0)}
+}
+@keyframes glowSoft{
+    0%{box-shadow:0 0 28px rgba(0,229,255,0.25)}
+    50%{box-shadow:0 0 45px rgba(0,229,255,0.45)}
+    100%{box-shadow:0 0 28px rgba(0,229,255,0.25)}
+}
+
+.card{
+    width:410px;
+    padding:28px;
+    border-radius:22px;
+    background:rgba(14,14,14,0.82);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(0,229,255,0.35);
+    animation:
+        startAnim 1s ease forwards,
+        floatSmooth 6s ease-in-out infinite 1s,
+        glowSoft 5s ease-in-out infinite;
+}
+
+h2{
+    text-align:center;
+    color:#00e5ff;
+    margin-bottom:26px;
+}
+
+/* Inputs */
+label{
+    font-size:13px;
+    color:#bdbdbd;
+}
+input{
+    width:100%;
+    padding:13px;
+    margin:7px 0 18px;
+    border-radius:14px;
+    border:none;
+    background:#1c1c1c;
+    color:#fff;
+    font-size:15px;
+}
+input:focus{
+    outline:none;
+    box-shadow:0 0 12px rgba(0,229,255,0.7);
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:16px;
+    background:linear-gradient(90deg,#00e5ff,#0072ff);
+    font-size:16px;
+    color:#fff;
+    cursor:pointer;
+}
+button:hover{
+    box-shadow:0 10px 25px rgba(0,229,255,0.5);
+}
+
+/* Result */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+.result{
+    margin-top:24px;
+    padding:18px;
+    border-radius:16px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,0.08);
+    font-size:15px;
+    line-height:1.9;
+}
+span{
+    color:#00ffb3;
+    font-weight:500;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Crypto PnL Calculator</h2>
+
+    <label>Entry Price ($)</label>
+    <input id="entry" type="number" placeholder="100000">
+
+    <label>Exit / Stop Loss Price ($)</label>
+    <input id="exit" type="number" placeholder="100000">
+
+    <label>Risk Amount ($)</label>
+    <input id="risk" type="number" placeholder="100">
+
+    <label>Leverage (x)</label>
+    <input id="leverage" type="number" placeholder="25">
+
+    <button onclick="calc()">Calculate</button>
+
+    <div class="result" id="result">
+        Waiting for calculation…
+    </div>
+</div>
+
+<script>
+function calc(){
+    // ✅ SAFE INPUT ACCESS
+    let entry = Number(document.getElementById("entry").value);
+    let exit = Number(document.getElementById("exit").value);
+    let risk = Number(document.getElementById("risk").value);
+    let lev  = Number(document.getElementById("leverage").value);
+    let resultBox = document.getElementById("result");
+
+    if(!entry || !exit || !risk || !lev){
+        resultBox.innerHTML = "⚠️ Please fill all fields";
+        return;
+    }
+
+    let qty = risk / Math.abs(entry - exit);
+    let margin = (qty * entry) / lev;
+    let pnl = (exit - entry) * qty;
+
+    resultBox.style.animation = "none";
+    resultBox.offsetHeight;
+    resultBox.style.animation = "fadeUp 0.5s ease";
+
+    resultBox.innerHTML =
+        `Quantity: <span>${qty.toFixed(4)} BTC & ETH </span><br>
+         Margin Required: <span>$${margin.toFixed(2)}</span><br>
+         PnL: <span>$${pnl.toFixed(2)}</span>`;
+}
+</script>
+
+</body>
+</html>

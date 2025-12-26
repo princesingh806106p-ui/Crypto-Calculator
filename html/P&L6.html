@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Crypto Calculator</title>
+
+<style>
+body{
+    margin:0;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:'Segoe UI',Arial;
+    color:#fff;
+    overflow:hidden;
+}
+
+/* ===== START ANIMATION ===== */
+@keyframes startAnim{
+    from{
+        opacity:0;
+        transform:translateY(30px) scale(0.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+}
+
+/* ===== SMOOTH FLOAT (VERY SOFT) ===== */
+@keyframes smoothFloat{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-6px)}
+    100%{transform:translateY(0)}
+}
+
+/* ===== SOFT GLOW PULSE ===== */
+@keyframes glowPulse{
+    0%{box-shadow:0 0 25px rgba(0,229,255,0.25)}
+    50%{box-shadow:0 0 40px rgba(0,229,255,0.45)}
+    100%{box-shadow:0 0 25px rgba(0,229,255,0.25)}
+}
+
+.card{
+    width:400px;
+    padding:26px;
+    border-radius:20px;
+    background:rgba(12,12,12,0.82);
+    backdrop-filter:blur(14px);
+    border:1px solid rgba(0,229,255,0.4);
+
+    /* 🔥 PERFORMANCE BOOST */
+    will-change:transform;
+    
+    animation:
+        startAnim 0.9s ease forwards,
+        smoothFloat 6s ease-in-out infinite 1s,
+        glowPulse 5s ease-in-out infinite;
+}
+
+h2{
+    text-align:center;
+    color:#00e5ff;
+    margin-bottom:22px;
+    letter-spacing:1px;
+}
+
+/* Inputs */
+label{
+    font-size:12px;
+    color:#bbb;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    margin:6px 0 16px;
+    border-radius:12px;
+    border:none;
+    background:#1b1b1b;
+    color:#fff;
+    font-size:15px;
+}
+
+input:focus{
+    outline:none;
+    box-shadow:0 0 10px #00e5ff;
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#00e5ff,#0072ff);
+    font-size:16px;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 20px rgba(0,229,255,0.5);
+}
+
+/* Result */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.result{
+    margin-top:22px;
+    padding:16px;
+    border-radius:14px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,0.1);
+    font-size:15px;
+    line-height:1.8;
+}
+
+span{
+    color:#00ffb3;
+    font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Crypto PnL Calculator</h2>
+
+    <label>Entry Price ($)</label>
+    <input id="entry" type="number" placeholder="89000">
+
+    <label>Exit / Stop Loss Price ($)</label>
+    <input id="exit" type="number" placeholder="88850">
+
+    <label>Risk Amount ($)</label>
+    <input id="risk" type="number" placeholder="100">
+
+    <label>Leverage (x)</label>
+    <input id="leverage" type="number" placeholder="25">
+
+    <button onclick="calc()">Calculate</button>
+
+    <div class="result" id="result">
+        Waiting for calculation...
+    </div>
+</div>
+
+<script>
+function calc(){
+    let entry = +entry.value;
+    let exit = +exit.value;
+    let risk = +risk.value;
+    let lev = +leverage.value;
+
+    let qty = risk / Math.abs(entry-exit);
+    let margin = (qty * entry) / lev;
+    let pnl = (exit-entry) * qty;
+
+    result.style.animation="none";
+    result.offsetHeight;
+    result.style.animation="fadeUp 0.5s ease";
+
+    result.innerHTML =
+    `Quantity: <span>${qty.toFixed(4)} BTC</span><br>
+     Margin Required: <span>$${margin.toFixed(2)}</span><br>
+     PnL: <span>$${pnl.toFixed(2)}</span>`;
+}
+</script>
+
+</body>
+</html>

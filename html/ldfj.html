@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>events</title>
+        <script>
+            //internal Script 
+            function keyup()
+            {
+              document.getElementById("key-status").innerHTML="Key is up";
+            }
+            
+            function keydown() {
+                 document.getElementById("key-status").innerHTML="Key is down";
+            }
+            function keypress()
+            {
+                document.getElementById("key-char").innerHTML="pressed key:" + event.key;
+            }
+
+        </script>
+    </head>
+    <body>
+        <input type="text"
+        placeholder="press any key"
+        onkeyup="keyup()"
+        onkeydown="keydown()"
+        onekeypress="keypress(event)">
+        <p id ="key-status" style="color: rgb(255, 0, 0);font-size: 40px;"></p>
+        <p id="key-char" style="color: aqua;font-size: 50px;">
+
+        </p>
+    </body>
+</html>

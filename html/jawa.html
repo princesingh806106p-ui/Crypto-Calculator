@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradePro - Smart Stock Trading Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stock-item {
+            transition: all 0.2s ease;
+        }
+        
+        .stock-item:hover {
+            background-color: #f8fafc;
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .slide-up {
+            animation: slideUp 0.5s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-white shadow-sm border-b">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <h1 class="text-2xl font-bold text-indigo-600">TradePro</h1>
+                    </div>
+                    <div class="hidden md:block ml-10">
+                        <div class="flex items-baseline space-x-8">
+                            <a href="#" class="text-gray-900 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Dashboard</a>
+                            <a href="#" class="text-gray-500 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Stocks</a>
+                            <a href="#" class="text-gray-500 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Mutual Funds</a>
+                            <a href="#" class="text-gray-500 hover:text-indigo-600 px-3 py-2 text-sm font-medium">Portfolio</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-sm text-gray-600">Demo Mode</span>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium">
+                        Start Trading
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <!-- Hero Section -->
+        <section class="gradient-bg rounded-2xl p-8 mb-8 text-white slide-up">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h2 class="text-4xl font-bold mb-4">Smart Trading Made Simple</h2>
+                    <p class="text-xl mb-6 text-indigo-100">Zero brokerage on equity delivery trades. Start your investment journey with India's fastest growing trading platform.</p>
+                    <div class="flex space-x-4">
+                        <button class="bg-white text-indigo-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                            Open Free Account
+                        </button>
+                        <button class="border-2 border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-indigo-600 transition-colors">
+                            Watch Demo
+                        </button>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <h3 class="text-2xl font-bold mb-4">Portfolio Value</h3>
+                        <div class="text-4xl font-bold mb-2">₹2,45,680</div>
+                        <div class="text-green-300 text-lg">+₹12,340 (+5.3%) Today</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Stats -->
+        <section class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Total Investment</p>
+                        <p class="text-2xl font-bold text-gray-900">₹2,33,340</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Current Value</p>
+                        <p class="text-2xl font-bold text-gray-900">₹2,45,680</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Day's P&L</p>
+                        <p class="text-2xl font-bold text-green-600">+₹12,340</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 11l5-5m0 0l5 5m-5-5v12"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-xl p-6 shadow-sm card-hover">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <p class="text-gray-600 text-sm">Available Balance</p>
+                        <p class="text-2xl font-bold text-gray-900">₹45,230</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-full">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Content Grid -->
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Watchlist & Trading -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Market Overview -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">Market Overview</h3>
+                        <div class="flex space-x-2">
+                            <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">Market Open</span>
+                            <span class="text-sm text-gray-500">Last updated: 2 mins ago</span>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">NIFTY 50</p>
+                            <p class="text-xl font-bold text-gray-900">19,674.25</p>
+                            <p class="text-green-600 text-sm">+234.50 (+1.21%)</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">SENSEX</p>
+                            <p class="text-xl font-bold text-gray-900">66,023.69</p>
+                            <p class="text-green-600 text-sm">+789.23 (+1.21%)</p>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-lg">
+                            <p class="text-sm text-gray-600">BANK NIFTY</p>
+                            <p class="text-xl font-bold text-gray-900">44,156.80</p>
+                            <p class="text-red-600 text-sm">-123.45 (-0.28%)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Watchlist -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h3 class="text-xl font-semibold text-gray-900">My Watchlist</h3>
+                        <button class="text-indigo-600 hover:text-indigo-800 text-sm font-medium">+ Add Stock</button>
+                    </div>
+                    
+                    <div class="space-y-3">
+                        <div class="stock-item flex items-center justify-between p-3 rounded-lg cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center">
+                                    <span class="text-blue-600 font-semibold text-sm">TCS</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Tata Consultancy Services</p>
+                                    <p class="text-sm text-gray-500">NSE</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">₹3,456.75</p>
+                                <p class="text-green-600 text-sm">+45.20 (+1.32%)</p>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium ml-4">
+                                Buy
+                            </button>
+                        </div>
+                        
+                        <div class="stock-item flex items-center justify-between p-3 rounded-lg cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
+                                    <span class="text-red-600 font-semibold text-sm">RIL</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Reliance Industries</p>
+                                    <p class="text-sm text-gray-500">NSE</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">₹2,234.50</p>
+                                <p class="text-red-600 text-sm">-23.75 (-1.05%)</p>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium ml-4">
+                                Buy
+                            </button>
+                        </div>
+                        
+                        <div class="stock-item flex items-center justify-between p-3 rounded-lg cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
+                                    <span class="text-green-600 font-semibold text-sm">INFY</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">Infosys Limited</p>
+                                    <p class="text-sm text-gray-500">NSE</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">₹1,567.80</p>
+                                <p class="text-green-600 text-sm">+12.30 (+0.79%)</p>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium ml-4">
+                                Buy
+                            </button>
+                        </div>
+                        
+                        <div class="stock-item flex items-center justify-between p-3 rounded-lg cursor-pointer">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center">
+                                    <span class="text-purple-600 font-semibold text-sm">HDFC</span>
+                                </div>
+                                <div>
+                                    <p class="font-medium text-gray-900">HDFC Bank</p>
+                                    <p class="text-sm text-gray-500">NSE</p>
+                                </div>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-gray-900">₹1,678.90</p>
+                                <p class="text-green-600 text-sm">+8.45 (+0.51%)</p>
+                            </div>
+                            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-medium ml-4">
+                                Buy
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Quick Actions -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
+                    <div class="space-y-3">
+                        <button class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 px-4 rounded-lg font-medium transition-colors">
+                            Place Order
+                        </button>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors">
+                            Add Funds
+                        </button>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors">
+                            View Portfolio
+                        </button>
+                        <button class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium transition-colors">
+                            Market Analysis
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Recent Orders</h3>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <p class="font-medium text-gray-900">TCS - BUY</p>
+                            <p class="text-sm text-gray-600">10 shares at ₹3,450</p>
+                            <p class="text-xs text-green-600">Executed</p>
+                        </div>
+                        <div class="border-l-4 border-red-500 pl-4">
+                            <p class="font-medium text-gray-900">RIL - SELL</p>
+                            <p class="text-sm text-gray-600">5 shares at ₹2,240</p>
+                            <p class="text-xs text-red-600">Executed</p>
+                        </div>
+                        <div class="border-l-4 border-yellow-500 pl-4">
+                            <p class="font-medium text-gray-900">INFY - BUY</p>
+                            <p class="text-sm text-gray-600">15 shares at ₹1,560</p>
+                            <p class="text-xs text-yellow-600">Pending</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Market News -->
+                <div class="bg-white rounded-xl shadow-sm p-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Market News</h3>
+                    <div class="space-y-4">
+                        <div class="border-b border-gray-100 pb-3">
+                            <p class="text-sm font-medium text-gray-900 mb-1">Nifty hits new all-time high</p>
+                            <p class="text-xs text-gray-600">Markets surge on positive economic data</p>
+                            <p class="text-xs text-gray-400 mt-1">2 hours ago</p>
+                        </div>
+                        <div class="border-b border-gray-100 pb-3">
+                            <p class="text-sm font-medium text-gray-900 mb-1">IT stocks rally continues</p>
+                            <p class="text-xs text-gray-600">Strong Q3 results boost sector sentiment</p>
+                            <p class="text-xs text-gray-400 mt-1">4 hours ago</p>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-900 mb-1">Banking sector outlook</p>
+                            <p class="text-xs text-gray-600">RBI policy decision awaited</p>
+                            <p class="text-xs text-gray-400 mt-1">6 hours ago</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Demo Notice -->
+    <div class="fixed bottom-4 right-4 bg-yellow-100 border border-yellow-400 text-yellow-800 px-4 py-3 rounded-lg shadow-lg max-w-sm">
+        <div class="flex items-center">
+            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+            </svg>
+            <div>
+                <p class="font-semibold text-sm">Demo Mode</p>
+                <p class="text-xs">This is a sample trading interface. No real trades are executed.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time price updates
+        function updatePrices() {
+            const stockItems = document.querySelectorAll('.stock-item');
+            stockItems.forEach(item => {
+                const priceElement = item.querySelector('.font-semibold');
+                const changeElement = item.querySelector('.text-green-600, .text-red-600');
+                
+                if (priceElement && changeElement) {
+                    // Simulate small price changes
+                    const currentPrice = parseFloat(priceElement.textContent.replace('₹', '').replace(',', ''));
+                    const change = (Math.random() - 0.5) * 10; // Random change between -5 and +5
+                    const newPrice = currentPrice + change;
+                    
+                    priceElement.textContent = `₹${newPrice.toFixed(2)}`;
+                    
+                    // Update change color and value
+                    const changeValue = Math.abs(change).toFixed(2);
+                    const changePercent = ((change / currentPrice) * 100).toFixed(2);
+                    
+                    if (change >= 0) {
+                        changeElement.className = 'text-green-600 text-sm';
+                        changeElement.textContent = `+₹${changeValue} (+${changePercent}%)`;
+                    } else {
+                        changeElement.className = 'text-red-600 text-sm';
+                        changeElement.textContent = `-₹${changeValue} (-${changePercent}%)`;
+                    }
+                }
+            });
+        }
+
+        // Update prices every 3 seconds
+        setInterval(updatePrices, 3000);
+
+        // Add click handlers for buy buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent === 'Buy') {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const stockName = this.closest('.stock-item').querySelector('.font-medium').textContent;
+                    
+                    // Create a temporary success message
+                    const message = document.createElement('div');
+                    message.className = 'fixed top-4 right-4 bg-green-100 border border-green-400 text-green-800 px-4 py-3 rounded-lg shadow-lg z-50';
+                    message.innerHTML = `
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                            </svg>
+                            <span>Order placed for ${stockName}!</span>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(message);
+                    
+                    // Remove message after 3 seconds
+                    setTimeout(() => {
+                        message.remove();
+                    }, 3000);
+                });
+            }
+        });
+
+        // Add smooth scrolling for better UX
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'993f62bef1ad45af',t:'MTc2MTM3MDg5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

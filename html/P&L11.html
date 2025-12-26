@@ -1,0 +1,114 @@
+<style>
+body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+    font-family:'Poppins',sans-serif;
+    color:#fff;
+}
+
+/* Animations */
+@keyframes startAnim{
+    from{opacity:0;transform:translateY(40px)}
+    to{opacity:1;transform:translateY(0)}
+}
+@keyframes floatSmooth{
+    0%{transform:translateY(0)}
+    50%{transform:translateY(-8px)}
+    100%{transform:translateY(0)}
+}
+@keyframes glowSoft{
+    0%{box-shadow:0 0 30px rgba(0,229,255,0.25)}
+    50%{box-shadow:0 0 50px rgba(0,229,255,0.45)}
+    100%{box-shadow:0 0 30px rgba(0,229,255,0.25)}
+}
+
+/* 🔥 MAIN CARD (PHONE OPTIMIZED) */
+.card{
+    width:95vw;              /* full width on phone */
+    max-width:480px;         /* limit for big phones */
+    padding:32px;
+    border-radius:24px;
+    background:rgba(14,14,14,0.85);
+    backdrop-filter:blur(16px);
+    border:1px solid rgba(0,229,255,0.35);
+
+    animation:
+        startAnim 1s ease forwards,
+        floatSmooth 6s ease-in-out infinite 1s,
+        glowSoft 5s ease-in-out infinite;
+}
+
+/* Heading */
+h2{
+    text-align:center;
+    font-size:26px;
+    font-weight:600;
+    color:#00e5ff;
+    margin-bottom:30px;
+}
+
+/* Labels */
+label{
+    font-size:15px;
+    color:#bdbdbd;
+}
+
+/* Inputs */
+input{
+    width:100%;
+    padding:16px;
+    margin:8px 0 22px;
+    border-radius:16px;
+    border:none;
+    background:#1c1c1c;
+    color:#fff;
+    font-size:17px;
+}
+
+input:focus{
+    outline:none;
+    box-shadow:0 0 14px rgba(0,229,255,0.7);
+}
+
+/* Button */
+button{
+    width:100%;
+    padding:18px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(90deg,#00e5ff,#0072ff);
+    font-size:18px;
+    font-weight:600;
+    color:#fff;
+    cursor:pointer;
+}
+
+button:hover{
+    box-shadow:0 12px 28px rgba(0,229,255,0.5);
+}
+
+/* Result */
+@keyframes fadeUp{
+    from{opacity:0;transform:translateY(10px)}
+    to{opacity:1;transform:translateY(0)}
+}
+
+.result{
+    margin-top:28px;
+    padding:22px;
+    border-radius:18px;
+    background:#151515;
+    border:1px solid rgba(255,255,255,0.08);
+    font-size:17px;
+    line-height:2;
+}
+
+span{
+    color:#00ffb3;
+    font-weight:600;
+}
+</style>
